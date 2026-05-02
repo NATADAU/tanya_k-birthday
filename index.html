@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Для Тани — с днём рождения</title>
+  <meta name="description" content="Нежный, веселый, романтичный и дружеский лендинг-поздравление для Тани." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Marck+Script&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fff8fb;
+      --bg-2: #fff1f7;
+      --surface: rgba(255,255,255,.72);
+      --surface-strong: rgba(255,255,255,.9);
+      --text: #4d3040;
+      --muted: #8d6a79;
+      --accent: #ef5d9b;
+      --accent-2: #ffb9d4;
+      --accent-3: #ffe4ef;
+      --gold: #ffd56f;
+      --purple: #c997ff;
+      --blue: #87c8ff;
+      --shadow: 0 18px 55px rgba(196, 95, 144, 0.18);
+      --radius-xl: 30px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --max: 1100px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, #ffe3f0 0, transparent 26%),
+        radial-gradient(circle at 88% 8%, #fff2b8 0, transparent 18%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; height: auto; }
+    .wrap { width: min(var(--max), calc(100% - 32px)); margin: 0 auto; }
+    .floating-decor, .sparkles { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
+    .floating-decor span, .sparkles span { position: absolute; opacity: .22; animation: rise linear infinite; }
+    .floating-decor span { font-size: 20px; }
+    .sparkles span {
+      width: 10px; height: 10px; border-radius: 50%; background: #ffd76a; box-shadow: 0 0 18px #ffd76a;
+    }
+    @keyframes rise {
+      from { transform: translateY(110vh) rotate(0deg) scale(.9); }
+      to { transform: translateY(-15vh) rotate(18deg) scale(1.15); }
+    }
+    .music-fab {
+      position: fixed; right: 18px; bottom: 18px; z-index: 60;
+      display: inline-flex; align-items: center; gap: 10px;
+      border: none; cursor: pointer;
+      border-radius: 999px; padding: 14px 18px;
+      background: linear-gradient(135deg, var(--accent), #ff82b3);
+      color: #fff; font-weight: 700; box-shadow: 0 16px 40px rgba(239,93,155,.35);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .music-fab:hover { transform: translateY(-2px); box-shadow: 0 20px 45px rgba(239,93,155,.42); }
+    .music-fab .dot {
+      width: 10px; height: 10px; border-radius: 50%; background: #fff; opacity: .8;
+    }
+    .hero {
+      min-height: 100vh; display: grid; align-items: center; position: relative; z-index: 1;
+      padding: 36px 0 22px;
+    }
+    .glass {
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,.68);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      box-shadow: var(--shadow); border-radius: var(--radius-xl);
+    }
+    .hero-card { text-align: center; padding: 32px 28px; }
+    .eyebrow {
+      display: inline-block; padding: 10px 16px; border-radius: 999px; background: rgba(255,255,255,.86);
+      color: var(--muted); font-size: 14px; margin-bottom: 18px;
+    }
+    h1 {
+      margin: 0; font-family: 'Marck Script', cursive; line-height: .95;
+      font-size: clamp(58px, 10vw, 122px); color: #dd4c92; text-shadow: 0 10px 30px rgba(221,76,146,.15);
+    }
+    .hero-lead {
+      max-width: 33ch; margin: 18px auto 0; font-size: clamp(19px, 2.1vw, 25px); line-height: 1.55;
+    }
+    .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 14px 22px; border-radius: 999px; text-decoration: none; border: none; cursor: pointer;
+      font-size: 15px; font-weight: 700; transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), #ff82b3); color: #fff; box-shadow: 0 14px 32px rgba(239,93,155,.32); }
+    .btn-secondary { background: rgba(255,255,255,.88); color: var(--text); }
+    main { position: relative; z-index: 1; }
+    section { padding: 28px 0; }
+    .grid { display: grid; gap: 22px; }
+    .two { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .card { padding: 26px; }
+    .section-label { display: inline-block; margin-bottom: 10px; color: #dd4c92; font-weight: 800; }
+    .title { margin: 0 0 14px; font-size: clamp(28px, 4vw, 48px); line-height: 1.05; }
+    .lead { color: var(--muted); font-size: 17px; line-height: 1.8; }
+    .photo-card { overflow: hidden; padding: 14px; }
+    .photo-card img { width: 100%; border-radius: 22px; box-shadow: 0 8px 30px rgba(117,70,93,.14); }
+    .caption {
+      margin-top: 12px; color: var(--muted); font-size: 14px; text-align: center;
+    }
+    .story-box, .reason-item, .music-note {
+      background: var(--surface-strong); border: 1px solid rgba(255,255,255,.72); border-radius: var(--radius-lg);
+      padding: 18px;
+    }
+    .reasons { display: grid; gap: 14px; margin-top: 16px; }
+    .reason-item { display: flex; gap: 14px; align-items: flex-start; }
+    .reason-num {
+      width: 36px; height: 36px; flex: 0 0 36px; border-radius: 50%; display: grid; place-items: center;
+      background: var(--accent-3); color: #dd4c92; font-weight: 800;
+    }
+    .story-grid { display: grid; gap: 16px; }
+    .music-panel { padding: 24px; }
+    .music-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+    .mini-pill {
+      display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; padding: 8px 12px;
+      background: rgba(255,255,255,.88); color: var(--muted); font-size: 13px;
+    }
+    .final { text-align: center; padding: 48px 0 96px; }
+    .final .glass { padding: 32px 26px; }
+    .heart-big { font-size: 56px; margin-bottom: 10px; }
+    .hint { color: var(--muted); font-size: 13px; line-height: 1.6; margin-top: 10px; }
+    #confetti-canvas { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; }
+    .audio-visual {
+      display: inline-flex; align-items: center; gap: 4px; height: 18px;
+    }
+    .audio-visual span {
+      width: 4px; border-radius: 999px; background: #fff; display: block; animation: bounce 1s infinite ease-in-out;
+    }
+    .audio-visual span:nth-child(1){ height: 8px; animation-delay: .0s; }
+    .audio-visual span:nth-child(2){ height: 15px; animation-delay: .12s; }
+    .audio-visual span:nth-child(3){ height: 10px; animation-delay: .24s; }
+    .audio-visual span:nth-child(4){ height: 16px; animation-delay: .36s; }
+    @keyframes bounce { 0%,100%{ transform: scaleY(.65); opacity:.7; } 50%{ transform: scaleY(1.15); opacity:1; } }
+    @media (max-width: 820px) {
+      .two { grid-template-columns: 1fr; }
+      .hero-card, .card, .final .glass { padding: 22px; }
+      .music-fab { right: 14px; bottom: 14px; padding: 13px 16px; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="confetti-canvas"></canvas>
+  <div class="floating-decor" aria-hidden="true"></div>
+  <div class="sparkles" aria-hidden="true"></div>
+
+  <button class="music-fab" id="musicToggle" aria-label="Включить музыку">
+    <span class="audio-visual" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+    <span id="musicLabel">Включить музыку</span>
+  </button>
+
+  <audio id="bgMusic" loop preload="auto">
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="glass hero-card">
+        <div class="eyebrow">Нежно, весело, романтично и по-дружески</div>
+        <h1>Для Тани</h1>
+        <p class="hero-lead">С днём рождения, Таня. Сегодня для тебя — маленький праздник из тепла, благодарности, музыки и любви.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#letter">Открыть поздравление</a>
+          <a class="btn btn-secondary" href="#collage">Посмотреть коллаж</a>
+        </div>
+        <p class="hint">Музыка на телефонах и в мобильных браузерах обычно начинает играть только после нажатия на кнопку пользователем, поэтому я сделала заметную плавающую кнопку запуска. После старта музыка будет играть фоном, пока листаешь лендинг.</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="letter">
+      <div class="glass card">
+        <span class="section-label">Поздравление</span>
+        <h2 class="title">Пусть этот день будет таким же светлым, как ты</h2>
+        <p class="lead">Таня, с днём рождения.</p>
+        <p class="lead">Ты — человек, рядом с которым спокойно. Ты много лет работаешь в Центре лечебной педагогики психологом, руководишь группой, где занимаются дети с аутизмом и другими ОВЗ, и делаешь это с удивительным достоинством, терпением и внутренней силой.</p>
+        <p class="lead">В тебе очень красиво сочетаются спокойствие, ум, такт, уверенность и настоящая человеческая глубина. Ты умеешь разбирать самые сложные ситуации — и в разговорах с родителями, и в работе с детьми, и в общении с коллегами. Рядом с тобой становится понятнее, тише и надежнее.</p>
+        <p class="lead">Я очень благодарна тебе за то, что когда я пришла работать в ЦЛП, ты поддержала меня и была рядом. Это не забывается. Такие вещи остаются в сердце надолго.</p>
+        <p class="lead">И для меня особенно тепло то, что моя дочка ходила к тебе в садик. Это тоже часть нашей общей истории, в которой есть доверие, забота и очень много доброты.</p>
+        <p class="lead">Пусть в твоей жизни будет больше лёгкости, радости, хороших людей, тихого счастья, красивых моментов и поводов улыбаться. Пусть тебя окружают любовь, уважение и благодарность — потому что ты этого правда заслуживаешь.</p>
+      </div>
+    </section>
+
+    <section id="collage">
+      <div class="grid two">
+        <article class="glass photo-card">
+          <img src="tanya-collage.jpg" alt="Теплый праздничный коллаж для Тани" width="1024" height="768" loading="lazy">
+          <p class="caption">Коллаж можно просто положить рядом с HTML-файлом под именем <strong>tanya-collage.jpg</strong>. Я уже использовала это имя в коде.</p>
+        </article>
+        <aside class="glass card">
+          <span class="section-label">Теплый визуальный момент</span>
+          <h2 class="title">Немного нежности, красок и улыбки</h2>
+          <p class="lead">Мне очень хотелось добавить сюда что-то не просто красивое, а по-настоящему живое и тёплое. Поэтому этот коллаж — как маленькая история в картинках, с настроением, добротой, улыбкой и ощущением праздника.</p>
+          <p class="lead">Иногда один рисунок говорит больше, чем длинные слова. Здесь — тепло, радость, немного волшебства и очень доброе чувство, которое хочется подарить тебе в этот день.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="story">
+      <div class="glass card">
+        <span class="section-label">Наша история</span>
+        <h2 class="title">То, что мне особенно дорого</h2>
+        <div class="story-grid">
+          <div class="story-box">Когда я пришла работать в ЦЛП, ты очень поддержала меня. Я помню это с большой благодарностью, потому что рядом с тобой было легче войти в новую для себя работу и почувствовать опору.</div>
+          <div class="story-box">Мне очень тепло вспоминать и то, что моя дочка ходила к тебе в садик. В этом для меня много доверия, заботы и очень настоящего человеческого отношения.</div>
+          <div class="story-box">Ты из тех людей, которые не просто хорошо делают своё дело, а создают вокруг себя пространство, где другим спокойнее, яснее и надежнее.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="reasons">
+      <div class="glass card">
+        <span class="section-label">Почему именно ты</span>
+        <h2 class="title">Три причины, почему ты особенная</h2>
+        <div class="reasons">
+          <div class="reason-item"><div class="reason-num">1</div><div><strong>Ты умеешь сохранять спокойствие там, где другим было бы очень трудно.</strong><br>В этом есть и большая мудрость, и внутренняя сила.</div></div>
+          <div class="reason-item"><div class="reason-num">2</div><div><strong>Ты находишь решение в самых сложных человеческих ситуациях.</strong><br>И в переговорах с родителями, и в работе с детьми, и в общении с коллегами.</div></div>
+          <div class="reason-item"><div class="reason-num">3</div><div><strong>Ты умеешь поддерживать так, что рядом с тобой становится легче и надежнее.</strong><br>Это очень редкое и прекрасное качество.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="music">
+      <div class="glass music-panel">
+        <span class="section-label">Музыка для настроения</span>
+        <h2 class="title">Пусть этот вечер звучит красиво</h2>
+        <p class="lead">Положи музыкальный файл рядом с HTML-кодом под именем <strong>music.mp3</strong>. После нажатия на плавающую кнопку музыка начнет играть фоном и будет продолжаться, пока Таня листает лендинг.</p>
+        <div class="music-row">
+          <div class="mini-pill">Файл рядом с кодом: <strong>music.mp3</strong></div>
+          <div class="mini-pill">Коллаж рядом с кодом: <strong>tanya-collage.jpg</strong></div>
+        </div>
+        <p class="hint">Современные браузеры ограничивают автозапуск звука, поэтому надежный вариант — видимая кнопка запуска музыки по нажатию пользователя. После такого пользовательского действия фоновое воспроизведение на этой странице обычно уже работает. </p>
+      </div>
+    </section>
+
+    <section id="final" class="final">
+      <div class="glass">
+        <div class="heart-big">💖</div>
+        <span class="section-label">Финал</span>
+        <h2 class="title">И конечно — фейерверк для Тани</h2>
+        <p class="lead">Спасибо тебе за доброту, профессионализм, спокойствие и внутреннюю силу. Пусть этот новый год жизни будет мягким, светлым, счастливым и наполненным любовью, уважением, радостью и красивыми моментами.</p>
+        <button class="btn btn-primary" id="fireworksButton">Запустить фейерверк</button>
+        <p class="hint">Фейерверк запускается по нажатию и дополнительно автоматически срабатывает при прокрутке до финального блока — так эффект заметнее и надежнее в браузере.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
+  <script>
+    const decor = document.querySelector('.floating-decor');
+    const sparkles = document.querySelector('.sparkles');
+    const decorItems = ['♥','♡','❤','★','✦','✿'];
+    for (let i = 0; i < 18; i++) {
+      const el = document.createElement('span');
+      el.textContent = decorItems[i % decorItems.length];
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.animationDuration = (12 + Math.random() * 12) + 's';
+      el.style.animationDelay = (Math.random() * 8) + 's';
+      el.style.fontSize = (14 + Math.random() * 16) + 'px';
+      el.style.color = ['#ef5d9b','#ffd56f','#c997ff','#87c8ff'][i % 4];
+      decor.appendChild(el);
+    }
+    for (let i = 0; i < 24; i++) {
+      const dot = document.createElement('span');
+      dot.style.left = Math.random() * 100 + 'vw';
+      dot.style.top = Math.random() * 100 + 'vh';
+      dot.style.animationDuration = (9 + Math.random() * 10) + 's';
+      dot.style.animationDelay = (Math.random() * 8) + 's';
+      sparkles.appendChild(dot);
+    }
+
+    const music = document.getElementById('bgMusic');
+    const musicToggle = document.getElementById('musicToggle');
+    const musicLabel = document.getElementById('musicLabel');
+    let isPlaying = false;
+
+    async function toggleMusic() {
+      try {
+        if (isPlaying) {
+          music.pause();
+          isPlaying = false;
+          musicLabel.textContent = 'Включить музыку';
+          musicToggle.setAttribute('aria-label', 'Включить музыку');
+        } else {
+          music.volume = 0.6;
+          await music.play();
+          isPlaying = true;
+          musicLabel.textContent = 'Выключить музыку';
+          musicToggle.setAttribute('aria-label', 'Выключить музыку');
+        }
+      } catch (e) {
+        musicLabel.textContent = 'Нажми ещё раз для музыки';
+      }
+    }
+    musicToggle.addEventListener('click', toggleMusic);
+
+    const myConfetti = confetti.create(document.getElementById('confetti-canvas'), { resize: true, useWorker: true });
+    let fireworksPlayed = false;
+
+    function burst(x, y, count = 1) {
+      const colors = ['#ef5d9b','#ffd56f','#ffffff','#c997ff','#87c8ff'];
+      for (let i = 0; i < count; i++) {
+        myConfetti({
+          particleCount: 28,
+          startVelocity: 42,
+          spread: 90,
+          ticks: 140,
+          scalar: 1.05,
+          origin: { x: Math.min(0.95, Math.max(0.05, x + (Math.random() - 0.5) * 0.06)), y: Math.min(0.6, Math.max(0.08, y + (Math.random() - 0.5) * 0.08)) },
+          colors
+        });
+      }
+    }
+
+    function launchFireworks() {
+      const sequence = [
+        [0.18, 0.28, 2, 0],
+        [0.82, 0.25, 2, 220],
+        [0.50, 0.18, 3, 460],
+        [0.26, 0.38, 2, 760],
+        [0.74, 0.35, 2, 980],
+        [0.50, 0.28, 5, 1300]
+      ];
+      sequence.forEach(([x, y, count, delay]) => {
+        setTimeout(() => burst(x, y, count), delay);
+      });
+      setTimeout(() => {
+        const duration = 1800;
+        const end = Date.now() + duration;
+        (function frame() {
+          myConfetti({ particleCount: 8, angle: 60, spread: 70, origin: { x: 0 }, colors: ['#ef5d9b','#ffd56f','#ffffff','#c997ff','#87c8ff'] });
+          myConfetti({ particleCount: 8, angle: 120, spread: 70, origin: { x: 1 }, colors: ['#ef5d9b','#ffd56f','#ffffff','#c997ff','#87c8ff'] });
+          if (Date.now() < end) requestAnimationFrame(frame);
+        }());
+      }, 1600);
+    }
+
+    document.getElementById('fireworksButton').addEventListener('click', () => {
+      fireworksPlayed = true;
+      launchFireworks();
+    });
+
+    const finalSection = document.getElementById('final');
+    const finalObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !fireworksPlayed) {
+          fireworksPlayed = true;
+          launchFireworks();
+        }
+      });
+    }, { threshold: 0.55 });
+    finalObserver.observe(finalSection);
+  </script>
+</body>
+</html>
