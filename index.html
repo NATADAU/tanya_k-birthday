@@ -1,353 +1,629 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Для Тани — с днём рождения</title>
-  <meta name="description" content="Веселый и дружеское поздравление для Тани." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Marck+Script&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #fff8fb;
-      --bg-2: #fff1f7;
-      --surface: rgba(255,255,255,.72);
-      --surface-strong: rgba(255,255,255,.9);
-      --text: #4d3040;
-      --muted: #8d6a79;
-      --accent: #ef5d9b;
-      --accent-2: #ffb9d4;
-      --accent-3: #ffe4ef;
-      --gold: #ffd56f;
-      --purple: #c997ff;
-      --blue: #87c8ff;
-      --shadow: 0 18px 55px rgba(196, 95, 144, 0.18);
-      --radius-xl: 30px;
-      --radius-lg: 24px;
-      --radius-md: 18px;
-      --max: 1100px;
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: Inter, system-ui, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top left, #ffe3f0 0, transparent 26%),
-        radial-gradient(circle at 88% 8%, #fff2b8 0, transparent 18%),
-        linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
-      overflow-x: hidden;
-    }
-    img { display: block; max-width: 100%; height: auto; }
-    .wrap { width: min(var(--max), calc(100% - 32px)); margin: 0 auto; }
-    .floating-decor, .sparkles { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
-    .floating-decor span, .sparkles span { position: absolute; opacity: .22; animation: rise linear infinite; }
-    .floating-decor span { font-size: 20px; }
-    .sparkles span {
-      width: 10px; height: 10px; border-radius: 50%; background: #ffd76a; box-shadow: 0 0 18px #ffd76a;
-    }
-    @keyframes rise {
-      from { transform: translateY(110vh) rotate(0deg) scale(.9); }
-      to { transform: translateY(-15vh) rotate(18deg) scale(1.15); }
-    }
-    .music-fab {
-      position: fixed; right: 18px; bottom: 18px; z-index: 60;
-      display: inline-flex; align-items: center; gap: 10px;
-      border: none; cursor: pointer;
-      border-radius: 999px; padding: 14px 18px;
-      background: linear-gradient(135deg, var(--accent), #ff82b3);
-      color: #fff; font-weight: 700; box-shadow: 0 16px 40px rgba(239,93,155,.35);
-      transition: transform .2s ease, box-shadow .2s ease;
-    }
-    .music-fab:hover { transform: translateY(-2px); box-shadow: 0 20px 45px rgba(239,93,155,.42); }
-    .music-fab .dot {
-      width: 10px; height: 10px; border-radius: 50%; background: #fff; opacity: .8;
-    }
-    .hero {
-      min-height: 100vh; display: grid; align-items: center; position: relative; z-index: 1;
-      padding: 36px 0 22px;
-    }
-    .glass {
-      background: var(--surface);
-      border: 1px solid rgba(255,255,255,.68);
-      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-      box-shadow: var(--shadow); border-radius: var(--radius-xl);
-    }
-    .hero-card { text-align: center; padding: 32px 28px; }
-    .eyebrow {
-      display: inline-block; padding: 10px 16px; border-radius: 999px; background: rgba(255,255,255,.86);
-      color: var(--muted); font-size: 14px; margin-bottom: 18px;
-    }
-    h1 {
-      margin: 0; font-family: 'Marck Script', cursive; line-height: .95;
-      font-size: clamp(58px, 10vw, 122px); color: #dd4c92; text-shadow: 0 10px 30px rgba(221,76,146,.15);
-    }
-    .hero-lead {
-      max-width: 33ch; margin: 18px auto 0; font-size: clamp(19px, 2.1vw, 25px); line-height: 1.55;
-    }
-    .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-      padding: 14px 22px; border-radius: 999px; text-decoration: none; border: none; cursor: pointer;
-      font-size: 15px; font-weight: 700; transition: transform .2s ease, box-shadow .2s ease;
-    }
-    .btn:hover { transform: translateY(-2px); }
-    .btn-primary { background: linear-gradient(135deg, var(--accent), #ff82b3); color: #fff; box-shadow: 0 14px 32px rgba(239,93,155,.32); }
-    .btn-secondary { background: rgba(255,255,255,.88); color: var(--text); }
-    main { position: relative; z-index: 1; }
-    section { padding: 28px 0; }
-    .grid { display: grid; gap: 22px; }
-    .two { grid-template-columns: repeat(2, minmax(0,1fr)); }
-    .card { padding: 26px; }
-    .section-label { display: inline-block; margin-bottom: 10px; color: #dd4c92; font-weight: 800; }
-    .title { margin: 0 0 14px; font-size: clamp(28px, 4vw, 48px); line-height: 1.05; }
-    .lead { color: var(--muted); font-size: 17px; line-height: 1.8; }
-    .photo-card { overflow: hidden; padding: 14px; }
-    .photo-card img { width: 100%; border-radius: 22px; box-shadow: 0 8px 30px rgba(117,70,93,.14); }
-    .caption {
-      margin-top: 12px; color: var(--muted); font-size: 14px; text-align: center;
-    }
-    .story-box, .reason-item, .music-note {
-      background: var(--surface-strong); border: 1px solid rgba(255,255,255,.72); border-radius: var(--radius-lg);
-      padding: 18px;
-    }
-    .reasons { display: grid; gap: 14px; margin-top: 16px; }
-    .reason-item { display: flex; gap: 14px; align-items: flex-start; }
-    .reason-num {
-      width: 36px; height: 36px; flex: 0 0 36px; border-radius: 50%; display: grid; place-items: center;
-      background: var(--accent-3); color: #dd4c92; font-weight: 800;
-    }
-    .story-grid { display: grid; gap: 16px; }
-    .music-panel { padding: 24px; }
-    .music-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
-    .mini-pill {
-      display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; padding: 8px 12px;
-      background: rgba(255,255,255,.88); color: var(--muted); font-size: 13px;
-    }
-    .final { text-align: center; padding: 48px 0 96px; }
-    .final .glass { padding: 32px 26px; }
-    .heart-big { font-size: 56px; margin-bottom: 10px; }
-    .hint { color: var(--muted); font-size: 13px; line-height: 1.6; margin-top: 10px; }
-    #confetti-canvas { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; }
-    .audio-visual {
-      display: inline-flex; align-items: center; gap: 4px; height: 18px;
-    }
-    .audio-visual span {
-      width: 4px; border-radius: 999px; background: #fff; display: block; animation: bounce 1s infinite ease-in-out;
-    }
-    .audio-visual span:nth-child(1){ height: 8px; animation-delay: .0s; }
-    .audio-visual span:nth-child(2){ height: 15px; animation-delay: .12s; }
-    .audio-visual span:nth-child(3){ height: 10px; animation-delay: .24s; }
-    .audio-visual span:nth-child(4){ height: 16px; animation-delay: .36s; }
-    @keyframes bounce { 0%,100%{ transform: scaleY(.65); opacity:.7; } 50%{ transform: scaleY(1.15); opacity:1; } }
-    @media (max-width: 820px) {
-      .two { grid-template-columns: 1fr; }
-      .hero-card, .card, .final .glass { padding: 22px; }
-      .music-fab { right: 14px; bottom: 14px; padding: 13px 16px; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Контрактный отдел — май 2026</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root {
+  --teal:  #019BAB;
+  --teal2: #5BBEC9;
+  --teal3: #C7E9ED;
+  --pink:  #E5004F;
+  --pink2: #EA496D;
+  --yel:   #F8A600;
+  --grn:   #04A634;
+  --grn2:  #89BD1E;
+  --bg:    #F8F8F8;
+  --white: #FFFFFF;
+  --grey:  #626261;
+  --black: #2A2A2A;
+  --brd:   #D8EDEF;
+  --r:     14px;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes countUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:linear-gradient(160deg,#f0fafb 0%,#f8f8f8 60%,#fdf0f5 100%);background-attachment:fixed;color:var(--black);font-family:'Segoe UI',system-ui,sans-serif;font-size:16px;min-height:100vh;}
+
+/* HEADER */
+.hdr{background:linear-gradient(120deg,#017a87 0%,var(--teal) 40%,var(--teal2) 100%);padding:0 20px;position:sticky;top:0;z-index:200;box-shadow:0 4px 24px rgba(1,155,171,.4);}
+.hdr-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 0 0;flex-wrap:wrap;gap:8px;}
+.hdr h1{font-size:clamp(1.05rem,3.5vw,1.45rem);font-weight:700;color:#fff;letter-spacing:-.01em;}
+.hdr-sub{font-size:.88rem;color:rgba(255,255,255,.8);margin-top:3px;}
+.badge{background:linear-gradient(135deg,rgba(255,255,255,.3),rgba(255,255,255,.15));border:1px solid rgba(255,255,255,.5);border-radius:20px;padding:5px 16px;font-size:.88rem;color:#fff;font-weight:700;white-space:nowrap;backdrop-filter:blur(4px);}
+.hdr-right{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.tabs{display:flex;overflow-x:auto;scrollbar-width:none;margin-top:12px;}
+.tabs::-webkit-scrollbar{display:none;}
+.tab-btn{background:none;border:none;border-bottom:3px solid transparent;color:rgba(255,255,255,.7);cursor:pointer;font-size:1rem;font-family:inherit;font-weight:500;padding:10px 22px;transition:.25s;white-space:nowrap;}
+.tab-btn:hover{color:#fff;}
+.tab-btn.active{color:#fff;border-bottom-color:#fff;}
+.burger{display:none;background:none;border:none;cursor:pointer;padding:4px;flex-shrink:0;}
+.burger span{display:block;width:26px;height:2.5px;background:#fff;margin:5px 0;border-radius:2px;transition:.3s;}
+.burger.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg);}
+.burger.open span:nth-child(2){opacity:0;}
+.burger.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg);}
+.mob-menu{display:none;position:fixed;inset:0;background:linear-gradient(160deg,#017a87,var(--teal),var(--teal2));z-index:190;flex-direction:column;align-items:center;justify-content:center;}
+.mob-menu.open{display:flex;}
+.mob-btn{background:none;border:none;border-bottom:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.75);cursor:pointer;font-size:1.5rem;font-family:inherit;font-weight:600;padding:18px 0;width:80%;text-align:center;transition:.2s;}
+.mob-btn:last-child{border-bottom:none;}
+.mob-btn.active,.mob-btn:hover{color:#fff;}
+.mob-btn.active{color:var(--teal3);}
+
+/* MAIN */
+main{max-width:960px;margin:0 auto;padding:24px 16px 70px;}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;animation:fadeIn .35s ease;}
+
+.sec{font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:var(--grey);margin:28px 0 14px;display:flex;align-items:center;gap:10px;}
+.sec::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--brd),transparent);}
+.sec:first-child{margin-top:6px;}
+
+/* KPI CARDS */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:14px;margin-bottom:18px;}
+.card{background:var(--white);border:1px solid var(--brd);border-radius:var(--r);padding:22px 20px;border-top:4px solid transparent;transition:transform .2s,box-shadow .2s;animation:fadeUp .4s ease both;}
+.card:nth-child(1){animation-delay:.05s}.card:nth-child(2){animation-delay:.12s}.card:nth-child(3){animation-delay:.19s}
+.card:nth-child(4){animation-delay:.26s}.card:nth-child(5){animation-delay:.33s}.card:nth-child(6){animation-delay:.40s}
+.card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(1,155,171,.13);}
+.card.ct{border-top-color:var(--teal);background:linear-gradient(160deg,#fff 70%,#f0fafb 100%);}
+.card.cp{border-top-color:var(--pink);background:linear-gradient(160deg,#fff 70%,#fff0f4 100%);}
+.card.cg{border-top-color:var(--grn);background:linear-gradient(160deg,#fff 70%,#f0fdf4 100%);}
+.card-lbl{font-size:.82rem;color:var(--grey);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;}
+.card-val{font-size:2.8rem;font-weight:700;line-height:1;letter-spacing:-.03em;}
+.vt{color:var(--teal);}.vp{color:var(--pink);}.vg{color:var(--grn);}
+.card-sub{font-size:.85rem;color:var(--grey);margin-top:7px;}
+.delta{font-size:.88rem;font-weight:700;margin-top:10px;}
+.du{color:var(--grn);}.dd{color:var(--pink);}
+
+/* --- НОВОЕ: мини-спарклайн в карточке --- */
+.sparkwrap{margin-top:12px;height:36px;position:relative;}
+.sparkwrap canvas{width:100%!important;height:36px!important;}
+
+/* FILTER ROW */
+.frow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center;}
+.flbl{font-size:.85rem;color:var(--grey);font-weight:600;white-space:nowrap;}
+.fbtn{background:var(--white);border:1.5px solid var(--brd);border-radius:8px;color:var(--grey);cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:500;padding:7px 15px;transition:.2s;}
+.fbtn:hover{border-color:var(--teal2);transform:translateY(-1px);}
+.fbtn.on{background:linear-gradient(135deg,var(--teal),var(--teal2));border-color:var(--teal);color:#fff;box-shadow:0 3px 12px rgba(1,155,171,.3);}
+.fbtn.on.pink{background:linear-gradient(135deg,var(--pink),var(--pink2));border-color:var(--pink);box-shadow:0 3px 12px rgba(229,0,79,.25);}
+.fbtn.on.grn{background:linear-gradient(135deg,var(--grn),var(--grn2));border-color:var(--grn);box-shadow:0 3px 12px rgba(4,166,52,.25);}
+
+/* CHART CARD */
+.ccrd{background:var(--white);border:1px solid var(--brd);border-radius:var(--r);padding:22px;margin-bottom:14px;box-shadow:0 2px 12px rgba(1,155,171,.06);animation:fadeUp .4s ease both;}
+.ccrd h3{font-size:1.02rem;font-weight:700;margin-bottom:4px;}
+.ccrd .cs{font-size:.85rem;color:var(--grey);margin-bottom:14px;}
+.cwrap{position:relative;height:250px;}
+.leg{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:14px;}
+.li{display:flex;align-items:center;gap:9px;font-size:1rem;color:var(--black);font-weight:500;}
+.ld{width:13px;height:13px;border-radius:50%;flex-shrink:0;}
+
+/* --- НОВОЕ: инфо-полоса под графиком --- */
+.chart-note{font-size:.82rem;color:var(--grey);margin-top:10px;padding:8px 12px;background:#f5fbfc;border-radius:8px;border-left:3px solid var(--teal2);}
+
+/* TABLE */
+.twrap{background:var(--white);border:1px solid var(--brd);border-radius:var(--r);overflow:hidden;margin-bottom:14px;box-shadow:0 2px 16px rgba(1,155,171,.07);animation:fadeUp .35s ease both;}
+.thdr{padding:18px 20px 12px;border-bottom:1px solid var(--brd);background:linear-gradient(90deg,#f5fbfc,#fff);}
+.thdr h3{font-size:1.02rem;font-weight:700;}
+.thdr p{font-size:.85rem;color:var(--grey);margin-top:3px;}
+.tscroll{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:.92rem;}
+thead th{background:linear-gradient(180deg,#e4f5f8,#d8eef2);color:var(--grey);font-size:.77rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;padding:10px 14px;text-align:center;border-bottom:2px solid var(--brd);}
+thead th:first-child{text-align:left;padding-left:20px;}
+tbody tr{transition:background .15s;}
+tbody tr:hover{background:linear-gradient(90deg,#f0f9fb,#f8feff);}
+tbody tr:not(:last-child) td{border-bottom:1px solid var(--brd);}
+tbody td{padding:12px 14px;text-align:center;font-size:.94rem;}
+tbody td:first-child{text-align:left;padding-left:20px;color:var(--grey);font-weight:500;}
+.cdiv{border-left:1px solid var(--brd);}
+.tn{font-weight:600;}.tt{color:var(--teal);font-weight:700;}.tp{color:var(--pink);font-weight:700;}.tgg{color:var(--grn);font-weight:700;}
+tr.cur{background:linear-gradient(90deg,#daf2f6,#e8f8fb);}
+tr.cur td:first-child{color:var(--black);font-weight:700;}
+
+/* --- НОВОЕ: столбец Δ в таблице --- */
+.tdelta{font-size:.8rem;font-weight:700;padding:12px 8px;}
+.tdg{color:var(--grn);}.tdp{color:var(--pink);}
+
+/* CONCLUSIONS */
+.conc{background:var(--white);border:1px solid var(--brd);border-radius:var(--r);padding:24px;margin-bottom:14px;box-shadow:0 2px 14px rgba(1,155,171,.06);transition:box-shadow .25s,transform .25s;animation:fadeUp .4s ease both;}
+.conc:nth-child(2){animation-delay:.06s}.conc:nth-child(3){animation-delay:.12s}.conc:nth-child(4){animation-delay:.18s}
+.conc:nth-child(5){animation-delay:.24s}.conc:nth-child(6){animation-delay:.30s}
+.conc:hover{box-shadow:0 6px 28px rgba(1,155,171,.14);transform:translateY(-2px);}
+.conc h3{font-size:1.02rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.tag{font-size:.82rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:4px 13px;border-radius:20px;}
+.tagt{background:#c7e9ed;color:#014f57;}
+.tagg{background:#b8edca;color:#015e1e;}
+.tagp{background:#f9c4d4;color:#8b0030;}
+.conc-body{font-size:1.05rem;line-height:1.9;color:var(--grey);}
+.conc-body strong{color:var(--black);font-weight:700;}
+.srow{display:flex;gap:10px;margin:14px 0;flex-wrap:wrap;}
+.spill{background:linear-gradient(145deg,#f4fbfc,#edf7f9);border:1px solid var(--brd);border-radius:9px;padding:10px 18px;font-size:1rem;color:var(--grey);line-height:1.35;transition:transform .2s,box-shadow .2s;min-width:fit-content;}
+.spill:hover{transform:translateY(-2px);box-shadow:0 4px 14px rgba(1,155,171,.12);}
+.spill span{font-weight:700;font-size:1.45rem;display:block;}
+.st{color:var(--teal);}.sg{color:var(--grn);}.sp{color:var(--pink);}
+
+/* --- НОВОЕ: прогресс-бар годового разрыва --- */
+.gap-bar-wrap{margin:14px 0;}
+.gap-bar-lbl{display:flex;justify-content:space-between;font-size:.85rem;color:var(--grey);margin-bottom:6px;}
+.gap-bar-track{background:#f0f0f0;border-radius:8px;height:12px;overflow:hidden;}
+.gap-bar-fill{height:12px;border-radius:8px;transition:width 1s ease;}
+
+/* RESPONSIVE */
+@media(max-width:620px){
+  .burger{display:block;}.tabs{display:none;}.hdr-inner{padding-bottom:14px;}
+  .cards{grid-template-columns:1fr 1fr;}
+  main{padding:16px 12px 60px;}.cwrap{height:200px;}
+}
+@media(max-width:360px){.cards{grid-template-columns:1fr;}}
+</style>
 </head>
 <body>
-  <canvas id="confetti-canvas"></canvas>
-  <div class="floating-decor" aria-hidden="true"></div>
-  <div class="sparkles" aria-hidden="true"></div>
 
-  <button class="music-fab" id="musicToggle" aria-label="Включить музыку">
-    <span class="audio-visual" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
-    <span id="musicLabel">Включить музыку</span>
-  </button>
-
-  <audio id="bgMusic" loop preload="auto">
-    <source src="music.mp3" type="audio/mpeg">
-  </audio>
-
-  <header class="hero">
-    <div class="wrap">
-      <div class="glass hero-card">
-        <div class="eyebrow">Нежно, весело, романтично и по-дружески</div>
-        <h1>Для Тани</h1>
-        <p class="hero-lead">С днём рождения, Таня.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#letter">Открыть поздравление</a>
-          <a class="btn btn-secondary" href="#collage">Посмотреть</a>
-        </div>
+<div class="hdr">
+  <div class="hdr-inner">
+    <div style="display:flex;align-items:center;gap:14px;">
+      <img src="data:image/png;base64,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" alt="Логотип ЦЛП" style="width:52px;height:52px;border-radius:50%;border:2px solid rgba(255,255,255,.4);flex-shrink:0;object-fit:cover;">
+      <div>
+        <h1>Контрактный отдел — май 2026</h1>
+        <div class="hdr-sub">Учебный год 2025–26 · сентябрь – май</div>
       </div>
     </div>
-  </header>
+    <div class="hdr-right">
+      <div class="badge">438 чел.</div>
+      <button class="burger" id="brgBtn" aria-label="Меню"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <nav class="tabs" id="deskTabs">
+    <button class="tab-btn" data-tab="overview">Обзор</button>
+    <button class="tab-btn" data-tab="dynamics">Динамика</button>
+    <button class="tab-btn" data-tab="table">Таблица</button>
+    <button class="tab-btn active" data-tab="conclusions">Выводы</button>
+  </nav>
+</div>
 
-  <main class="wrap">
-    <section id="letter">
-      <div class="glass card">
-        <span class="section-label">Поздравление</span>
-        <h2 class="title">Пусть этот день будет таким же светлым, как ты</h2>
-        <p class="lead">Таня, с днём рождения.</p>
-        <p class="lead">Ты — человек, рядом с которым спокойно. В тебе сочетаются спокойствие, ум, такт, уверенность и настоящая человеческая глубина. Рядом с тобой становится понятнее и надежнее.</p>
-        <p class="lead">Я очень благодарна тебе за то, что когда я пришла работать в ЦЛП, ты поддержала меня и была рядом.</p>
-        <p class="lead">Пусть в твоей жизни будет больше лёгкости, радости, тихого счастья и красивых моментов. Ты правда заслуживаешь любви, уважения и благодарности.</p>
+<div class="mob-menu" id="mobMenu">
+  <button class="mob-btn" data-tab="overview">Обзор</button>
+  <button class="mob-btn" data-tab="dynamics">Динамика</button>
+  <button class="mob-btn" data-tab="table">Таблица</button>
+  <button class="mob-btn active" data-tab="conclusions">Выводы</button>
+</div>
+
+<main>
+
+<!-- ══ ОБЗОР ══ -->
+<div class="tab-panel" id="tab-overview">
+  <div class="sec">Май 2026 — текущий месяц</div>
+  <div class="cards">
+    <div class="card cg">
+      <div class="card-lbl">Первичный приём</div>
+      <div class="card-val vg">51</div>
+      <div class="card-sub">май 2026</div>
+      <div class="delta du">▲ +24% к маю 2025 (41)</div>
+      <div class="sparkwrap"><canvas id="spPrim"></canvas></div>
+    </div>
+    <div class="card ct">
+      <div class="card-lbl">Занятия и консультации</div>
+      <div class="card-val vt">387</div>
+      <div class="card-sub">май 2026</div>
+      <div class="delta du">▲ +4% к маю 2025 (371)</div>
+      <div class="sparkwrap"><canvas id="spLess"></canvas></div>
+    </div>
+    <div class="card cg">
+      <div class="card-lbl">Всего детей</div>
+      <div class="card-val vg">438</div>
+      <div class="card-sub">май 2026</div>
+      <div class="delta du">▲ +6% к маю 2025 (412)</div>
+      <div class="sparkwrap"><canvas id="spTot"></canvas></div>
+    </div>
+  </div>
+
+  <div class="sec">Итоги учебного года · сентябрь – май 2025–26</div>
+  <div class="cards">
+    <div class="card ct">
+      <div class="card-lbl">Первичных приёмов за год</div>
+      <div class="card-val" style="font-size:2.2rem">557</div>
+      <div class="card-sub">сент–май · первичный приём</div>
+      <div class="delta dd">▼ −6% (было 594 в 2024–25)</div>
+    </div>
+    <div class="card ct">
+      <div class="card-lbl">Среднее занятий / мес</div>
+      <div class="card-val" style="font-size:2.2rem">397</div>
+      <div class="card-sub">сент–май 2025–26</div>
+      <div class="delta du">▲ +1% (было 394)</div>
+    </div>
+    <div class="card ct">
+      <div class="card-lbl">Среднее всего / мес</div>
+      <div class="card-val" style="font-size:2.2rem">459</div>
+      <div class="card-sub">сент–май 2025–26</div>
+      <div class="delta" style="color:var(--grey)">≈ 0% (было 460)</div>
+    </div>
+  </div>
+
+  <!-- НОВОЕ: прогресс закрытия годового разрыва -->
+  <div class="sec">Прогресс закрытия годового разрыва по первичному приёму</div>
+  <div class="ccrd" style="padding:20px 22px;">
+    <div style="font-size:.92rem;color:var(--grey);margin-bottom:14px;">
+      Отставание по первичному приёму сокращается с каждым месяцем. При текущем темпе июнь может закрыть разрыв.
+    </div>
+    <div class="gap-bar-wrap">
+      <div class="gap-bar-lbl"><span>Ноябрь: −52%</span><span>Декабрь: −7%</span><span>Февраль: −7%</span><span>Апрель: −17%</span></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:4px;">
+      <div style="text-align:center;">
+        <div style="font-size:.75rem;color:var(--grey);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em">Ноябрь</div>
+        <div class="gap-bar-track"><div class="gap-bar-fill" style="width:52%;background:var(--pink);"></div></div>
+        <div style="font-size:.85rem;font-weight:700;color:var(--pink);margin-top:4px">−52%</div>
       </div>
-    </section>
-
-    <section id="collage">
-      <div class="grid two">
-        <article class="glass photo-card">
-          <img src="tanya-collage.jpg" alt="Теплый праздничный коллаж для Тани" width="1024" height="768" loading="lazy">
-        </article>
-        <aside class="glass card">
-          
-          <h2 class="title">Немного нежности, красок и улыбки</h2>
-          <p class="lead">Мне очень хотелось добавить сюда что-то не просто красивое, а по-настоящему живое и тёплое. Поэтому этот коллаж — как маленькая история в картинках, с настроением, добротой и ощущением праздника.</p>
-        </aside>
+      <div style="text-align:center;">
+        <div style="font-size:.75rem;color:var(--grey);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em">Декабрь</div>
+        <div class="gap-bar-track"><div class="gap-bar-fill" style="width:7%;background:var(--pink);"></div></div>
+        <div style="font-size:.85rem;font-weight:700;color:var(--pink);margin-top:4px">−7%</div>
       </div>
-    </section>
-
-    <section id="story">
-      <div class="glass card">
-        <span class="section-label">Наша история</span>
-        <h2 class="title">То, что мне особенно дорого</h2>
-        <div class="story-grid">
-          <div class="story-box">Когда я пришла работать в ЦЛП, ты очень поддержала меня. Я помню это с большой благодарностью, потому что рядом с тобой было легче войти в новую для себя работу и почувствовать опору.</div>
-          <div class="story-box">Мы с Ане очень любим вспоминать, как она ходила к тебе в садик. Это тоже часть нашей общей истории, в которой много доверия и заботы.</div>
-        </div>
+      <div style="text-align:center;">
+        <div style="font-size:.75rem;color:var(--grey);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em">Февраль</div>
+        <div class="gap-bar-track"><div class="gap-bar-fill" style="width:7%;background:var(--pink);"></div></div>
+        <div style="font-size:.85rem;font-weight:700;color:var(--pink);margin-top:4px">−7%</div>
       </div>
-    </section>
-
-    <section id="reasons">
-      <div class="glass card">
-        <span class="section-label">Почему именно ты</span>
-        <h2 class="title">Три причины, почему ты особенная</h2>
-        <div class="reasons">
-          <div class="reason-item"><div class="reason-num">1</div><div><strong>Ты умеешь сохранять спокойствие там, где другим было бы очень трудно.</strong><br>В этом есть и большая мудрость, и внутренняя сила.</div></div>
-          <div class="reason-item"><div class="reason-num">2</div><div><strong>Ты находишь решение в самых сложных человеческих ситуациях.</strong><br>И в переговорах с родителями, и в работе с детьми, и в общении с коллегами.</div></div>
-          <div class="reason-item"><div class="reason-num">3</div><div><strong>Ты умеешь поддерживать так, что рядом с тобой становится легче и надежнее.</strong><br>Это очень редкое и прекрасное качество.</div></div>
-        </div>
+      <div style="text-align:center;">
+        <div style="font-size:.75rem;color:var(--grey);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em">Апрель</div>
+        <div class="gap-bar-track"><div class="gap-bar-fill" style="width:17%;background:var(--pink);"></div></div>
+        <div style="font-size:.85rem;font-weight:700;color:var(--pink);margin-top:4px">−17%</div>
       </div>
-    </section>
-
-    <section id="music">
-      <div class="glass music-panel">
-        <span class="section-label">Музыка для настроения</span>
-        <h2 class="title">Пусть этот вечер звучит красиво</h2>
-              </div>
-    </section>
-
-    <section id="final" class="final">
-      <div class="glass">
-        <div class="heart-big">💖</div>
-        <span class="section-label">Финал</span>
-        <h2 class="title">И конечно — фейерверк для Тани</h2>
-        <p class="lead">Спасибо тебе за доброту, профессионализм, спокойствие и внутреннюю силу. Пусть этот год будет мягким, светлым и счастливым.</p>
-        <button class="btn btn-primary" id="fireworksButton">Запустить фейерверк</button>
+      <div style="text-align:center;">
+        <div style="font-size:.75rem;color:var(--grey);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em">Май ★</div>
+        <div class="gap-bar-track"><div class="gap-bar-fill" style="width:24%;background:var(--grn);"></div></div>
+        <div style="font-size:.85rem;font-weight:700;color:var(--grn);margin-top:4px">+24%</div>
       </div>
-    </section>
-  </main>
+    </div>
+    <div class="chart-note" style="margin-top:14px;">★ В мае впервые за несколько месяцев первичный приём превысил прошлогодний. Годовое отставание сократилось с −8% (апрель) до −6% (май).</div>
+  </div>
+</div>
 
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
-  <script>
-    const decor = document.querySelector('.floating-decor');
-    const sparkles = document.querySelector('.sparkles');
-    const decorItems = ['♥','♡','❤','★','✦','✿'];
-    for (let i = 0; i < 18; i++) {
-      const el = document.createElement('span');
-      el.textContent = decorItems[i % decorItems.length];
-      el.style.left = Math.random() * 100 + 'vw';
-      el.style.animationDuration = (12 + Math.random() * 12) + 's';
-      el.style.animationDelay = (Math.random() * 8) + 's';
-      el.style.fontSize = (14 + Math.random() * 16) + 'px';
-      el.style.color = ['#ef5d9b','#ffd56f','#c997ff','#87c8ff'][i % 4];
-      decor.appendChild(el);
-    }
-    for (let i = 0; i < 24; i++) {
-      const dot = document.createElement('span');
-      dot.style.left = Math.random() * 100 + 'vw';
-      dot.style.top = Math.random() * 100 + 'vh';
-      dot.style.animationDuration = (9 + Math.random() * 10) + 's';
-      dot.style.animationDelay = (Math.random() * 8) + 's';
-      sparkles.appendChild(dot);
-    }
+<!-- ══ ДИНАМИКА ══ -->
+<div class="tab-panel" id="tab-dynamics">
+  <div class="sec">Всего детей по месяцам</div>
+  <div class="frow">
+    <span class="flbl">Показать:</span>
+    <button class="fbtn on" onclick="toggleTotal('total',this)">Всего</button>
+    <button class="fbtn on" onclick="toggleTotal('prim',this)">Первичный приём</button>
+    <button class="fbtn on" onclick="toggleTotal('less',this)">Занятия</button>
+  </div>
+  <div class="ccrd">
+    <div class="leg">
+      <div class="li"><div class="ld" style="background:#626261"></div>2024–25</div>
+      <div class="li"><div class="ld" style="background:#019BAB"></div>2025–26</div>
+    </div>
+    <div class="cwrap"><canvas id="cTotal"></canvas></div>
+    <div class="chart-note">Май 2025–26 выше майского прошлого года по всем трём показателям. «Всего» превышает прошлый год пятый месяц подряд (с января).</div>
+  </div>
 
-    const music = document.getElementById('bgMusic');
-    const musicToggle = document.getElementById('musicToggle');
-    const musicLabel = document.getElementById('musicLabel');
-    let isPlaying = false;
+  <div class="sec">Структура по месяцам</div>
+  <div class="frow">
+    <span class="flbl">Год:</span>
+    <button class="fbtn on" onclick="toggleBar('y24',this)">2024–25</button>
+    <button class="fbtn on" onclick="toggleBar('y25',this)">2025–26</button>
+    <span class="flbl" style="margin-left:8px">Тип:</span>
+    <button class="fbtn on pink" onclick="toggleBar('pr',this)">Первичный</button>
+    <button class="fbtn on grn" onclick="toggleBar('ls',this)">Занятия</button>
+  </div>
+  <div class="ccrd">
+    <h3>Первичный приём и занятия по месяцам</h3>
+    <div class="cs">Сентябрь – май · сравнение 2024–25 и 2025–26</div>
+    <div class="cwrap"><canvas id="cBar"></canvas></div>
+  </div>
 
-    async function toggleMusic() {
-      try {
-        if (isPlaying) {
-          music.pause();
-          isPlaying = false;
-          musicLabel.textContent = 'Включить музыку';
-          musicToggle.setAttribute('aria-label', 'Включить музыку');
-        } else {
-          music.volume = 0.6;
-          await music.play();
-          isPlaying = true;
-          musicLabel.textContent = 'Выключить музыку';
-          musicToggle.setAttribute('aria-label', 'Выключить музыку');
-        }
-      } catch (e) {
-        musicLabel.textContent = 'Нажми ещё раз для музыки';
+  <div class="sec">Тренд учебного года</div>
+  <div class="frow">
+    <span class="flbl">Линии:</span>
+    <button class="fbtn on" onclick="toggleTrendLine([0,1],this)">2024–25</button>
+    <button class="fbtn on" onclick="toggleTrendLine([2,3],this)">2025–26</button>
+  </div>
+  <div class="ccrd">
+    <h3>Линейный тренд — всего детей</h3>
+    <div class="cs">Сплошная — факт · пунктир — линия тренда</div>
+    <div class="cwrap"><canvas id="cTrend"></canvas></div>
+    <div class="chart-note">Тренд 2025–26 близок к горизонтальному: год начался высоко и удерживает уровень. Тренд 2024–25 имел более выраженный рост к концу года.</div>
+  </div>
+
+  <!-- НОВОЕ: график Δ первичного приёма -->
+  <div class="sec">Отклонение первичного приёма от прошлого года</div>
+  <div class="ccrd">
+    <h3>Δ первичный приём 2025–26 vs 2024–25 (%)</h3>
+    <div class="cs">Положительные значения — больше чем в прошлом году, отрицательные — меньше</div>
+    <div class="cwrap"><canvas id="cDelta"></canvas></div>
+    <div class="chart-note">В мае зафиксирован лучший результат года: +24%. Ноябрь остаётся самым слабым месяцем (−52% — резкий контраст с ноябрём 2024-25, когда был пик 103 ребёнка).</div>
+  </div>
+</div>
+
+<!-- ══ ТАБЛИЦА ══ -->
+<div class="tab-panel" id="tab-table">
+  <div class="sec">Данные учебного года · сентябрь – май</div>
+  <div class="frow">
+    <span class="flbl">Показать столбцы:</span>
+    <button class="fbtn on" onclick="toggleCols('pc',this)">Первичный приём</button>
+    <button class="fbtn on" onclick="toggleCols('lc',this)">Занятия</button>
+    <button class="fbtn on" onclick="toggleCols('tc',this)">Всего</button>
+    <button class="fbtn on" onclick="toggleCols('dc',this)">Δ%</button>
+  </div>
+  <div class="twrap">
+    <div class="thdr">
+      <h3>Сводная таблица посещаемости</h3>
+      <p>Учебные годы 2024–25 и 2025–26 · данные из табеля</p>
+    </div>
+    <div class="tscroll">
+    <table>
+      <thead>
+        <tr>
+          <th rowspan="2">Месяц</th>
+          <th colspan="3" class="cdiv pc">Первичный приём</th>
+          <th colspan="3" class="cdiv lc">Занятия и консультации</th>
+          <th colspan="3" class="cdiv tc">Всего</th>
+        </tr>
+        <tr>
+          <th class="cdiv pc">2024–25</th><th class="pc">2025–26</th><th class="pc dc">Δ%</th>
+          <th class="cdiv lc">2024–25</th><th class="lc">2025–26</th><th class="lc dc">Δ%</th>
+          <th class="cdiv tc">2024–25</th><th class="tc">2025–26</th><th class="tc dc">Δ%</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="cur">
+          <td>Май ★</td>
+          <td class="cdiv tgg pc">41</td><td class="tgg pc">51</td><td class="tdelta tdg dc">+24%</td>
+          <td class="cdiv tt lc">371</td><td class="tt lc">387</td><td class="tdelta tdg dc">+4%</td>
+          <td class="cdiv tn tc">412</td><td class="tgg tc">438</td><td class="tdelta tdg dc">+6%</td>
+        </tr>
+        <tr>
+          <td>Апрель</td>
+          <td class="cdiv tp pc">81</td><td class="tp pc">67</td><td class="tdelta tdp dc">−17%</td>
+          <td class="cdiv tt lc">401</td><td class="tt lc">441</td><td class="tdelta tdg dc">+10%</td>
+          <td class="cdiv tn tc">482</td><td class="tgg tc">508</td><td class="tdelta tdg dc">+5%</td>
+        </tr>
+        <tr>
+          <td>Март</td>
+          <td class="cdiv tn pc">46</td><td class="tn pc">54</td><td class="tdelta tdg dc">+17%</td>
+          <td class="cdiv tn lc">373</td><td class="tn lc">405</td><td class="tdelta tdg dc">+9%</td>
+          <td class="cdiv tn tc">419</td><td class="tn tc">459</td><td class="tdelta tdg dc">+10%</td>
+        </tr>
+        <tr>
+          <td>Февраль</td>
+          <td class="cdiv tn pc">70</td><td class="tn pc">65</td><td class="tdelta tdp dc">−7%</td>
+          <td class="cdiv tn lc">397</td><td class="tn lc">412</td><td class="tdelta tdg dc">+4%</td>
+          <td class="cdiv tn tc">467</td><td class="tn tc">477</td><td class="tdelta tdg dc">+2%</td>
+        </tr>
+        <tr>
+          <td>Январь</td>
+          <td class="cdiv tn pc">40</td><td class="tn pc">49</td><td class="tdelta tdg dc">+22%</td>
+          <td class="cdiv tn lc">366</td><td class="tn lc">383</td><td class="tdelta tdg dc">+5%</td>
+          <td class="cdiv tn tc">406</td><td class="tn tc">432</td><td class="tdelta tdg dc">+6%</td>
+        </tr>
+        <tr>
+          <td>Декабрь</td>
+          <td class="cdiv tn pc">58</td><td class="tn pc">54</td><td class="tdelta tdp dc">−7%</td>
+          <td class="cdiv tn lc">433</td><td class="tn lc">395</td><td class="tdelta tdp dc">−9%</td>
+          <td class="cdiv tn tc">475</td><td class="tn tc">449</td><td class="tdelta tdp dc">−5%</td>
+        </tr>
+        <tr>
+          <td>Ноябрь</td>
+          <td class="cdiv tn pc">103</td><td class="tn pc">49</td><td class="tdelta tdp dc">−52%</td>
+          <td class="cdiv tn lc">411</td><td class="tn lc">386</td><td class="tdelta tdp dc">−6%</td>
+          <td class="cdiv tn tc">524</td><td class="tn tc">435</td><td class="tdelta tdp dc">−17%</td>
+        </tr>
+        <tr>
+          <td>Октябрь</td>
+          <td class="cdiv tn pc">69</td><td class="tn pc">70</td><td class="tdelta tdg dc">+1%</td>
+          <td class="cdiv tn lc">422</td><td class="tn lc">386</td><td class="tdelta tdp dc">−9%</td>
+          <td class="cdiv tn tc">491</td><td class="tn tc">456</td><td class="tdelta tdp dc">−7%</td>
+        </tr>
+        <tr>
+          <td>Сентябрь</td>
+          <td class="cdiv tn pc">86</td><td class="tn pc">98</td><td class="tdelta tdg dc">+14%</td>
+          <td class="cdiv tn lc">374</td><td class="tn lc">377</td><td class="tdelta tdg dc">+1%</td>
+          <td class="cdiv tn tc">460</td><td class="tn tc">475</td><td class="tdelta tdg dc">+3%</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  <div style="font-size:.85rem;color:var(--grey);padding:0 4px;line-height:1.8;">★ — текущий отчётный месяц (май 2026)</div>
+</div>
+
+<!-- ══ ВЫВОДЫ ══ -->
+<div class="tab-panel active" id="tab-conclusions">
+  <div class="sec">Ключевые выводы · май 2026</div>
+
+  <div class="conc">
+    <h3>👨‍👩‍👧 Первичный приём: лучший процентный рост за весь год <span class="tag tagg">Позитив</span></h3>
+    <div class="conc-body">
+      В мае 2026 первичный приём составил <strong>51 ребёнок</strong> — на <strong>+24%</strong> выше мая 2025 (41). Это наибольший процентный прирост первичного приёма за весь учебный год. После трёх подряд отрицательных месяцев (ноябрь −52%, декабрь −7%, февраль −7%, апрель −17%) май дал уверенный положительный сигнал.
+      <div class="srow">
+        <div class="spill"><span class="sg">51</span>первичный май 2026</div>
+        <div class="spill"><span class="sg">+24%</span>к маю 2025</div>
+        <div class="spill"><span>41</span>май 2025</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="conc">
+    <h3>📚 Занятия: стабильно выше прошлого года <span class="tag tagt">Норма</span></h3>
+    <div class="conc-body">
+      Число детей на занятиях и консультациях — <strong>387</strong> (+4% к маю 2025: 371). После рекордного апреля (441) майский показатель закономерно снизился, однако остаётся выше прошлогоднего уровня. Это шестой месяц подряд, когда занятия превышают показатель 2024–25 (с декабря включительно). Среднемесячное по занятиям за год (397) впервые за год превысило показатель 2024–25 (394).
+      <div class="srow">
+        <div class="spill"><span class="st">387</span>занятия май 2026</div>
+        <div class="spill"><span class="sg">+4%</span>к маю 2025</div>
+        <div class="spill"><span>371</span>май 2025</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="conc">
+    <h3>📈 Всего детей: пятый месяц подряд выше прошлого года <span class="tag tagg">Позитив</span></h3>
+    <div class="conc-body">
+      Общее число детей в мае — <strong>438</strong>, что на <strong>+6%</strong> выше мая 2025 (412). Показатель «всего» превышает прошлогодние значения <strong>пять месяцев подряд</strong> — начиная с января 2026. (В октябре, ноябре, декабре 2025 он был ниже прошлого года.)
+      <div class="srow">
+        <div class="spill"><span class="sg">438</span>всего май 2026</div>
+        <div class="spill"><span class="sg">+6%</span>к маю 2025</div>
+        <div class="spill"><span>412</span>май 2025</div>
+        <div class="spill"><span class="sg">5</span>месяцев подряд ▲</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="conc">
+    <h3>⚠️ Годовой разрыв по первичному приёму сокращается <span class="tag tagt">Динамика</span></h3>
+    <div class="conc-body">
+      За учебный год (сент–май) суммарно <strong>557 первичных приёмов</strong> против 594 в 2024–25 — отставание <strong>−6%</strong>. Динамика сокращения разрыва устойчива: ноябрь (−52% в месяц) был худшей точкой, с тех пор год в целом восстанавливается. В апреле отставание за год было −8%, в мае уже −6%. Для полного закрытия разрыва в июне потребуется ≈ 37 новых семей.
+      <div class="srow">
+        <div class="spill"><span class="sp">557</span>приёмов 2025–26</div>
+        <div class="spill"><span class="sp">−6%</span>к 2024–25</div>
+        <div class="spill"><span>594</span>2024–25</div>
+        <div class="spill"><span class="st">≈37</span>нужно в июне для выхода в 0</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="conc">
+    <h3>🔄 Итог: год завершается с позитивной динамикой по всем трём показателям <span class="tag tagt">Итог</span></h3>
+    <div class="conc-body">
+      Май 2026 стал первым месяцем, когда все три ключевых показателя одновременно превысили прошлогодние значения. Первичный приём показал лучший рост года (+24%). Занятия вышли на плановый уровень (среднее 397 против 394 в 2024–25). Общая нагрузка держится на уровне прошлого года. Учебный год 2025–26 завершается уверенно.
+      <div class="srow">
+        <div class="spill"><span class="sg">+24%</span>первичный</div>
+        <div class="spill"><span class="sg">+4%</span>занятия</div>
+        <div class="spill"><span class="sg">+6%</span>всего</div>
+        <div class="spill"><span class="sp">−6%</span>разрыв за год</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<script>
+/* ─── TABS ─── */
+function switchTab(id){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn,.mob-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  document.querySelectorAll('[data-tab="'+id+'"]').forEach(b=>b.classList.add('active'));
+}
+document.querySelectorAll('.tab-btn,.mob-btn').forEach(b=>{
+  b.addEventListener('click',()=>{ switchTab(b.dataset.tab); closeMenu(); });
+});
+
+/* ─── BURGER ─── */
+const bb=document.getElementById('brgBtn'), mm=document.getElementById('mobMenu');
+function closeMenu(){ bb.classList.remove('open'); mm.classList.remove('open'); document.body.style.overflow=''; }
+bb.addEventListener('click',()=>{ const o=mm.classList.toggle('open'); bb.classList.toggle('open',o); document.body.style.overflow=o?'hidden':''; });
+
+/* ─── DATA ─── */
+const M=['Сен','Окт','Ноя','Дек','Янв','Фев','Мар','Апр','Май'];
+const t24=[460,491,524,475,406,467,419,482,412];
+const t25=[475,456,435,449,432,477,459,508,438];
+const p24=[86,69,103,58,40,70,46,81,41];
+const p25=[98,70,49,54,49,65,54,67,51];
+const l24=[374,422,411,433,366,397,373,401,371];
+const l25=[377,386,386,395,383,412,405,441,387];
+
+const grd='rgba(0,0,0,0.07)', tkc='#626261';
+const tip={backgroundColor:'#fff',borderColor:'#D8EDEF',borderWidth:1,titleColor:'#2A2A2A',bodyColor:'#626261',padding:13,titleFont:{size:15},bodyFont:{size:14}};
+function ctx(id){return document.getElementById(id).getContext('2d');}
+function scale(){return {x:{grid:{color:grd},ticks:{color:tkc,font:{size:14}}},y:{grid:{color:grd},ticks:{color:tkc,font:{size:14}},min:0}};}
+
+/* ─── СПАРКЛАЙНЫ ─── */
+function sparkline(id, data24, data25, color){
+  new Chart(ctx(id),{
+    type:'line',
+    data:{labels:M,datasets:[
+      {data:data24,borderColor:'rgba(98,98,97,.35)',borderWidth:1.5,pointRadius:0,tension:.4,fill:false},
+      {data:data25,borderColor:color,borderWidth:2,pointRadius:0,tension:.4,fill:false,
+       segment:{borderColor:ctx=>data25[ctx.p1DataIndex]>data24[ctx.p1DataIndex]?color:'rgba(229,0,79,.6)'}},
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{enabled:false}},
+      scales:{x:{display:false},y:{display:false,min:Math.min(...data24,...data25)*0.9,max:Math.max(...data24,...data25)*1.05}},
+      animation:{duration:800}}
+  });
+}
+sparkline('spPrim', p24, p25, '#04A634');
+sparkline('spLess', l24, l25, '#019BAB');
+sparkline('spTot',  t24, t25, '#04A634');
+
+/* ─── CHART 1: линейный ─── */
+const cTotal=new Chart(ctx('cTotal'),{
+  type:'line',
+  data:{labels:M,datasets:[
+    {label:'Всего 2024–25',    data:t24,borderColor:'#626261',backgroundColor:'rgba(98,98,97,.07)',borderWidth:2,pointRadius:4,tension:.4,fill:true},
+    {label:'Всего 2025–26',    data:t25,borderColor:'#019BAB',backgroundColor:'rgba(1,155,171,.1)',borderWidth:2.5,pointRadius:5,pointBackgroundColor:'#019BAB',tension:.4,fill:true},
+    {label:'Первичный 2024–25',data:p24,borderColor:'rgba(98,98,97,.45)',borderDash:[5,4],borderWidth:1.5,pointRadius:0,tension:.4,fill:false},
+    {label:'Первичный 2025–26',data:p25,borderColor:'rgba(1,155,171,.45)',borderDash:[5,4],borderWidth:1.5,pointRadius:0,tension:.4,fill:false},
+    {label:'Занятия 2024–25',  data:l24,borderColor:'rgba(248,166,0,.7)',borderDash:[3,3],borderWidth:1.5,pointRadius:0,tension:.4,fill:false},
+    {label:'Занятия 2025–26',  data:l25,borderColor:'rgba(4,166,52,.7)',borderDash:[3,3],borderWidth:1.5,pointRadius:0,tension:.4,fill:false},
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:tip},scales:scale()}
+});
+const grp={total:[0,1],prim:[2,3],less:[4,5]};
+function toggleTotal(g,btn){ btn.classList.toggle('on'); const on=btn.classList.contains('on'); grp[g].forEach(i=>{cTotal.data.datasets[i].hidden=!on;}); cTotal.update(); }
+
+/* ─── CHART 2: бар ─── */
+const cBar=new Chart(ctx('cBar'),{
+  type:'bar',
+  data:{labels:M,datasets:[
+    {label:'Первичный 2024–25',data:p24,backgroundColor:'rgba(199,233,237,.85)',borderRadius:3,borderSkipped:false},
+    {label:'Первичный 2025–26',data:p25,backgroundColor:'rgba(1,155,171,.8)',borderRadius:3,borderSkipped:false},
+    {label:'Занятия 2024–25',  data:l24,backgroundColor:'rgba(248,166,0,.7)',borderRadius:3,borderSkipped:false},
+    {label:'Занятия 2025–26',  data:l25,backgroundColor:'rgba(4,166,52,.75)',borderRadius:3,borderSkipped:false},
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:tkc,boxWidth:14,font:{size:14}}},tooltip:tip},scales:scale()}
+});
+const barMap={y24:[0,2],y25:[1,3],pr:[0,1],ls:[2,3]};
+function toggleBar(k,btn){ btn.classList.toggle('on'); const on=btn.classList.contains('on'); barMap[k].forEach(i=>{cBar.data.datasets[i].hidden=!on;}); cBar.update(); }
+
+/* ─── CHART 3: тренд ─── */
+function trend(a){
+  const n=a.length,sx=n*(n-1)/2,sx2=(n-1)*n*(2*n-1)/6,sy=a.reduce((s,v)=>s+v,0),sxy=a.reduce((s,v,i)=>s+v*i,0);
+  const m=(n*sxy-sx*sy)/(n*sx2-sx*sx),b=(sy-m*sx)/n;
+  return a.map((_,i)=>Math.round(m*i+b));
+}
+const cTrend=new Chart(ctx('cTrend'),{
+  type:'line',
+  data:{labels:M,datasets:[
+    {label:'Факт 2024–25', data:t24,borderColor:'rgba(98,98,97,.65)',borderWidth:2,pointRadius:3,tension:.4,fill:false},
+    {label:'Тренд 2024–25',data:trend(t24),borderColor:'rgba(98,98,97,.4)',borderDash:[7,4],borderWidth:1.5,pointRadius:0,fill:false},
+    {label:'Факт 2025–26', data:t25,borderColor:'#019BAB',borderWidth:2.5,pointRadius:4,pointBackgroundColor:'#019BAB',tension:.4,fill:false},
+    {label:'Тренд 2025–26',data:trend(t25),borderColor:'rgba(91,190,201,.65)',borderDash:[7,4],borderWidth:1.5,pointRadius:0,fill:false},
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:tkc,boxWidth:14,font:{size:14}}},tooltip:tip},scales:scale()}
+});
+function toggleTrendLine(idxs,btn){ btn.classList.toggle('on'); const on=btn.classList.contains('on'); idxs.forEach(i=>{cTrend.data.datasets[i].hidden=!on;}); cTrend.update(); }
+
+/* ─── CHART 4: НОВОЕ — Δ первичного ─── */
+const deltaP = p24.map((v,i)=>Math.round((p25[i]-v)/v*100));
+const cDelta=new Chart(ctx('cDelta'),{
+  type:'bar',
+  data:{labels:M,datasets:[{
+    label:'Δ% первичного',
+    data:deltaP,
+    backgroundColor:deltaP.map(v=>v>=0?'rgba(4,166,52,.75)':'rgba(229,0,79,.65)'),
+    borderRadius:4,
+    borderSkipped:false,
+  }]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{...tip,callbacks:{label:ctx=>`${ctx.raw>0?'+':''}${ctx.raw}%`}}},
+    scales:{
+      x:{grid:{color:grd},ticks:{color:tkc,font:{size:14}}},
+      y:{grid:{color:grd},ticks:{color:tkc,font:{size:14},callback:v=>`${v>0?'+':''}${v}%`},
+        afterDataLimits:scale=>{scale.min=Math.min(scale.min,-5);scale.max=Math.max(scale.max,5);}
       }
     }
-    musicToggle.addEventListener('click', toggleMusic);
+  }
+});
 
-    const myConfetti = confetti.create(document.getElementById('confetti-canvas'), { resize: true, useWorker: true });
-    let fireworksPlayed = false;
-
-    function burst(x, y, count = 1) {
-      const colors = ['#ef5d9b','#ffd56f','#ffffff','#c997ff','#87c8ff'];
-      for (let i = 0; i < count; i++) {
-        myConfetti({
-          particleCount: 28,
-          startVelocity: 42,
-          spread: 90,
-          ticks: 140,
-          scalar: 1.05,
-          origin: { x: Math.min(0.95, Math.max(0.05, x + (Math.random() - 0.5) * 0.06)), y: Math.min(0.6, Math.max(0.08, y + (Math.random() - 0.5) * 0.08)) },
-          colors
-        });
-      }
-    }
-
-    function launchFireworks() {
-      const sequence = [
-        [0.18, 0.28, 2, 0],
-        [0.82, 0.25, 2, 220],
-        [0.50, 0.18, 3, 460],
-        [0.26, 0.38, 2, 760],
-        [0.74, 0.35, 2, 980],
-        [0.50, 0.28, 5, 1300]
-      ];
-      sequence.forEach(([x, y, count, delay]) => {
-        setTimeout(() => burst(x, y, count), delay);
-      });
-      setTimeout(() => {
-        const duration = 1800;
-        const end = Date.now() + duration;
-        (function frame() {
-          myConfetti({ particleCount: 8, angle: 60, spread: 70, origin: { x: 0 }, colors: ['#ef5d9b','#ffd56f','#ffffff','#c997ff','#87c8ff'] });
-          myConfetti({ particleCount: 8, angle: 120, spread: 70, origin: { x: 1 }, colors: ['#ef5d9b','#ffd56f','#ffffff','#c997ff','#87c8ff'] });
-          if (Date.now() < end) requestAnimationFrame(frame);
-        }());
-      }, 1600);
-    }
-
-    document.getElementById('fireworksButton').addEventListener('click', () => {
-      fireworksPlayed = true;
-      launchFireworks();
-    });
-
-    const finalSection = document.getElementById('final');
-    const finalObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && !fireworksPlayed) {
-          fireworksPlayed = true;
-          launchFireworks();
-        }
-      });
-    }, { threshold: 0.55 });
-    finalObserver.observe(finalSection);
-  </script>
+/* ─── TABLE COLUMN FILTER ─── */
+function toggleCols(cls,btn){
+  btn.classList.toggle('on');
+  const on=btn.classList.contains('on');
+  document.querySelectorAll('.'+cls).forEach(el=>{ el.style.display=on?'':'none'; });
+}
+</script>
 </body>
 </html>
